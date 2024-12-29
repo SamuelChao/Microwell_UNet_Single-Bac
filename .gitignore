@@ -1,1 +1,6 @@
+__pycache__
 *.png
+*.tif
+*.csv
+*.keras
+UNetPP_result/log/*
