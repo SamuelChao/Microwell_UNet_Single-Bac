@@ -2,7 +2,6 @@ import os
 from os.path import join
 import numpy as np
 import tensorflow as tf
-from tensorflow import keras
 from  matplotlib import pyplot as plt
 import random
 import pandas as pd
@@ -143,8 +142,6 @@ def all_dataset_size(dataset_dir: str =  "./dataset"):
 
 
 def get_dataset_all(dataset_dir: str =  "./dataset"):
-    # Load directories
-    # dataset_dir = "./dataset"
     image_dir = join(dataset_dir, "images")
     train_data_dir = image_dir
 
@@ -157,11 +154,9 @@ def get_dataset_all(dataset_dir: str =  "./dataset"):
     print(f"Number of Testing Examples: {TESTSET_SIZE}")
 
 
-    # print("HAHA 01")
 
     ### Generate dataset variables
     all_dataset = tf.data.Dataset.list_files(train_data_dir + "/*.png",  shuffle = False)
-    # print(all_dataset)
     all_dataset = all_dataset.shuffle(BUFFER_SIZE, seed=SEED, reshuffle_each_iteration=False)
     all_dataset = all_dataset.map(parse_image)
 
@@ -171,7 +166,6 @@ def get_dataset_all(dataset_dir: str =  "./dataset"):
     train_dataset = train_dataset.take(TRAINSET_SIZE)
     test_dataset = all_dataset.skip(TRAINSET_SIZE + VALIDSET_SIZE)
 
-    # print("HAHA 03")
 
     train_dataset = train_dataset_preprocess(train_dataset)
     val_dataset = val_dataset_preprocess(val_dataset)
@@ -180,11 +174,6 @@ def get_dataset_all(dataset_dir: str =  "./dataset"):
     dataset = {"train": train_dataset, "val": val_dataset, "test": test_dataset}
     return dataset
     
-
-    # pass
-
-
-
 
 
 
@@ -198,9 +187,5 @@ if __name__ == '__main__':
     for image, mask in dataset['train'].take(1):
         sample_image, sample_mask = image, mask
 
-    print("HAHA 06")
-
     display_sample([sample_image[0], sample_mask[0]])
-
-    print("HAHA 07")
 
