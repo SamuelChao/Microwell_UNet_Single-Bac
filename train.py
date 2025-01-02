@@ -11,9 +11,9 @@ from keras.callbacks import ModelCheckpoint
 
 
 from dataloader import get_dataset_all, all_dataset_size
-from unetpp_model import build_unetPP_model
-from unet_model import build_unet_model
-from custom_callback import CustomHistory
+from utils.unetpp_model import build_unetPP_model
+from utils.unet_model import build_unet_model
+from utils.custom_callback import CustomHistory
 
 
 ## Set Epochs 

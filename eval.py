@@ -1,40 +1,20 @@
 import pandas as pd
 import numpy as np
-import os
 from os.path import join
-import random
 import tensorflow as tf
-import cv2
-from tqdm import tqdm
 from time import time
-import datetime
 from tensorflow import keras
-from keras import layers
-from keras.layers import Conv2D, MaxPooling2D, UpSampling2D, Concatenate
-from keras.layers import Input, Add, Conv2DTranspose
-from keras.models import Sequential, Model
-from keras.applications import VGG16
-from keras.optimizers import SGD, Adam
-from keras.losses import SparseCategoricalCrossentropy, MeanSquaredError, BinaryCrossentropy
-from keras.utils import plot_model
-from keras import callbacks
-from keras.callbacks import Callback
-from keras.callbacks import ModelCheckpoint
-
-
-from  matplotlib import pyplot as plt
-import matplotlib.image as mpimg
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from keras.losses import BinaryCrossentropy
 
 
 from dataloader import get_dataset_all, all_dataset_size
-from unetpp_model import build_unetPP_model
-from unet_model import build_unet_model
-from custom_callback import CustomHistory
-# import eval_utils
-from eval_utils import acc_calculator
-from eval_utils import get_predictions, get_confusion_matrix, plot_confusion_matrix
-from eval_utils import convert_singlebac, get_singlebac_confusion_matrix, plot_singlebac_confusion_matrix
+from utils.unetpp_model import build_unetPP_model
+from utils.unet_model import build_unet_model
+from utils.eval_utils import acc_calculator
+from utils.eval_utils import get_predictions, get_confusion_matrix, plot_confusion_matrix
+from utils.eval_utils import convert_singlebac, get_singlebac_confusion_matrix, plot_singlebac_confusion_matrix
+
+
 
 ## Setup Dataset
 dataset = get_dataset_all(dataset_dir = "./dataset")

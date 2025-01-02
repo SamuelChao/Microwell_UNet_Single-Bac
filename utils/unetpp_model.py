@@ -1,14 +1,6 @@
 import tensorflow as tf
-from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, UpSampling2D, Concatenate
-from tensorflow.keras.layers import Input, Add, Conv2DTranspose
-from tensorflow.keras.models import Sequential, Model
-# from tensorflow.keras.applications import VGG16
-# from tensorflow.keras.optimizers import SGD, Adam
-# from tensorflow.keras.losses import SparseCategoricalCrossentropy, MeanSquaredError, BinaryCrossentropy
-# from tensorflow.keras.utils import plot_model
-# from tensorflow.keras import callbacks
+
 
 
 

@@ -1,9 +1,5 @@
 import tensorflow as tf
-from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, UpSampling2D, Concatenate
-from tensorflow.keras.layers import Input, Add, Conv2DTranspose
-from tensorflow.keras.models import Sequential, Model
 
 
 def double_conv_block(x, n_filters):
