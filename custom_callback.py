@@ -18,15 +18,6 @@ class CustomHistory(Callback):
         self.val_binary_io_u_values.append(logs.get('val_binary_io_u'))
 
 
-# custom_history = CustomHistory()
-
-# checkpoint = ModelCheckpoint(
-#     unetPP_folder + 'best_UNetPP_model_0513.ckpt', 
-#     save_weights_only=True, 
-#     monitor='val_loss', 
-#     verbose=1, 
-#     save_best_only=True, 
-#     mode='min')
 
 
 def get_callback(model_name: str = 'UNetPP',
