@@ -3,4 +3,7 @@ __pycache__
 *.tif
 *.csv
 *.keras
+*.v2
 UNetPP_result/log/*
+
+
