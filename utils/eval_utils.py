@@ -5,8 +5,8 @@ import cv2
 from time import time
 from  matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-
-
+from pathlib import Path
+# Path("/my/directory").mkdir(parents=True, exist_ok=True)
 
 
 
@@ -56,6 +56,7 @@ def save_predict_sample(display_list, index, result_folder):
         plt.imshow(tf.keras.preprocessing.image.array_to_img(display_list[i]))
         plt.axis('off')
 
+    Path(result_folder + 'outputs').mkdir(parents=True, exist_ok=True)   
     plt.savefig(result_folder + f'outputs/{index}.png')
     plt.show()
 
@@ -132,7 +133,7 @@ def acc_calculator(predict, label):
 ## Generate Confusion Matrix
 def get_confusion_matrix(True_Counts, Pred_Counts, result_folder):
 
-    conf = confusion_matrix(True_Counts, Pred_Counts, normalize='false')
+    conf = confusion_matrix(True_Counts, Pred_Counts, normalize= None)
     nor_conf = confusion_matrix(True_Counts, Pred_Counts,normalize='true')
 
     conf_df = pd.DataFrame(conf)
@@ -201,7 +202,7 @@ def convert_singlebac(True_Counts, Pred_Counts, result_folder):
 ## Generate Single-Bacterium Confusion Matrix
 def get_singlebac_confusion_matrix(true_single, pred_single, result_folder):
 
-    conf = confusion_matrix(true_single, pred_single, normalize='false')
+    conf = confusion_matrix(true_single, pred_single, normalize= None)
     nor_conf = confusion_matrix(true_single, pred_single, normalize='true')
 
     conf_df = pd.DataFrame(conf)
