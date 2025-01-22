@@ -5,3 +5,14 @@ pandas
 scikit-learn
 # opencv-python
 opencv-python-headless
+sqlalchemy
+# psycopg2[extra]
+alembic
+fastapi-utils
+fastapi
+uvicorn
+pydantic
+peewee
+# transformers
+# sentencepiece
+python-multipart

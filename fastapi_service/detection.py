@@ -3,7 +3,64 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
-def detect_circles(image_path, min_radius=40, max_radius=60, dp=1, min_dist=50, exclusion_margin=100):
+def detect_circles(image, min_radius=40, max_radius=60, dp=1, min_dist=50, exclusion_margin=100):
+    # image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    # if image is None:
+    #     print(f"Error: Unable to load image at {image_path}")
+    #     return None, None, None
+
+    img_height, img_width = image.shape
+
+    # Apply GaussianBlur to reduce noise and improve circle detection
+    blurred = cv2.GaussianBlur(image, (9, 9), 2)
+
+    circles = cv2.HoughCircles(blurred, cv2.HOUGH_GRADIENT, dp=dp, minDist=min_dist, 
+                               param1=50, param2=30, minRadius=min_radius, maxRadius=max_radius)
+
+    if circles is None:
+        print("No circles detected.")
+        return None, None, None
+
+    circles = np.uint16(np.around(circles))
+
+    circle_data = []
+    bounding_boxes = []
+
+    center_x = []
+    center_y = []
+    radii = []
+    top_left = []
+    bottom_right = []
+
+    for circle in circles[0, :]:
+        x, y, radius = circle
+        
+        if (x - radius > exclusion_margin and x + radius < img_width - exclusion_margin and 
+            y - radius > exclusion_margin and y + radius < img_height - exclusion_margin):
+            x_min = x - radius
+            y_min = y - radius
+            x_max = x + radius
+            y_max = y + radius
+            
+            bounding_box = (x_min, y_min, x_max, y_max)
+            circle_data.append((x, y, radius))
+            bounding_boxes.append(bounding_box)
+
+            center_x.append(x)
+            center_y.append(y)
+            radii.append(radius)
+            top_left.append([x-90, y-90])
+            bottom_right.append([x+90, y+90])
+
+
+
+        
+    return center_x, center_y, radii, top_left, bottom_right
+
+
+
+
+def detect_circles_frompath(image_path, min_radius=40, max_radius=60, dp=1, min_dist=50, exclusion_margin=100):
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     if image is None:
         print(f"Error: Unable to load image at {image_path}")
@@ -83,7 +140,7 @@ def main():
     image_path = 'image/Ec-DH5alpha_1E7_BF_5ms_20X-partial-rotate.png'
     output_folder = 'output/microwell_slice'
 
-    circles, bounding_boxes, image = detect_circles(image_path)
+    circles, bounding_boxes, image = detect_circles_frompath(image_path)
 
     if circles is not None:
         # Draw circles on the image

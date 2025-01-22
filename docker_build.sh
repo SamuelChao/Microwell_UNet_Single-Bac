@@ -1,1 +1,1 @@
-docker build -t unet_well:1.0.3 .
+docker build -t unet_well:1.0.4 .
